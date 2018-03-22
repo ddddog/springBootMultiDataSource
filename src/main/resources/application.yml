@@ -1,0 +1,110 @@
+logging:
+  config: classpath:logback.xml
+server:
+  port: 8080        
+redisson:
+    address: redis://192.168.1.24:6379
+    password:
+    # 
+    #master-name: 
+    #sentinel-addresses:
+mybatis:
+    bus:
+       typeAliasesPackage: com.github.ddddog.springbootmultidatasource.bus.entity
+       mapperLocations: classpath:mapping/bus/*.xml
+    common:
+       typeAliasesPackage: com.github.ddddog.springbootmultidatasource.common.entity
+       mapperLocations: classpath:mapping/common/*.xml   
+#mapper  
+#mappers 通用mapper  
+mapper:
+  bus:
+     basePackage: com.github.ddddog.springbootmultidatasource.mapper.bus
+     mappers: com.github.ddddog.springbootmultidatasource.basemapper.MyMapper
+     not-empty: false
+     identity: MYSQL
+  common:
+     basePackage: com.github.ddddog.springbootmultidatasource.mapper.common
+     mappers: com.github.ddddog.springbootmultidatasource.basemapper.MyMapper
+     not-empty: false
+     identity: MYSQL
+spring:
+    datasource:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/dg_sbl?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: root
+        type: com.alibaba.druid.pool.DruidDataSource
+        #连接池的补充设置
+        #初始化、最小、最大
+        initialSize: 1
+        minIdle: 1
+        maxActive: 20
+        #获取连接等待超时的时间、毫秒(1m)
+        maxWait: 60000
+        #检测关闭空闲连接的间隔时间、毫秒(1m)，当空闲连接大于（minEvictableIdleTimeMillis），则关闭物理连接
+        timeBetweenEvictionRunsMillis: 60000
+        #一个连接在池中最小的生存时间、毫秒(5m)
+        minEvictableIdleTimeMillis: 300000
+        #用于检测连接是否有效的语句
+        validationQuery: SELECT 'x'
+        #检测连接的超时时间、秒
+        validationQueryTimeout: 3
+        #申请连接时，空闲时间大于（timeBetweenEvictionRunsMillis）,则检测连接的有效性
+        testWhileIdle: true
+        #申请连接时，检测连接的有效性（性能损耗）
+        testOnBorrow: false
+        #归还连接时，检测连接的有效性（性能损耗）
+        testOnReturn: false 
+        #监控统计拦截的filters,去掉后监控界面sql无法统计，'wall用于防火墙','log4j'用于日志
+        druid:
+             sys:
+                filters: stat,wall,log4j
+        filters: stat # ,wall,log4j # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙  
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000 # 通过connectProperties属性来打开mergeSql功能；慢SQL记录  
+        useGlobalDataSourceStat: true # 合并多个DruidDataSource的监控数据  
+        druidLoginName: root # 登录druid的账号  
+        druidPassword: root # 登录druid的密码
+common:
+    targetModelPackage: com.github.ddddog.springbootmultidatasource.common.entity
+    targetXMLPackage: mapping/common
+    targetMapperPackage: com.github.ddddog.springbootmultidatasource.mapper.common
+    datasource:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/dg_cn?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: root
+        type: com.alibaba.druid.pool.DruidDataSource
+        #连接池的补充设置
+        #初始化、最小、最大
+        initialSize: 1
+        minIdle: 1
+        maxActive: 20
+        #获取连接等待超时的时间、毫秒(1m)
+        maxWait: 60000
+        #检测关闭空闲连接的间隔时间、毫秒(1m)，当空闲连接大于（minEvictableIdleTimeMillis），则关闭物理连接
+        timeBetweenEvictionRunsMillis: 60000
+        #一个连接在池中最小的生存时间、毫秒(5m)
+        minEvictableIdleTimeMillis: 300000
+        #用于检测连接是否有效的语句
+        validationQuery: SELECT 'x'
+        #检测连接的超时时间、秒
+        validationQueryTimeout: 3
+        #申请连接时，空闲时间大于（timeBetweenEvictionRunsMillis）,则检测连接的有效性
+        testWhileIdle: true
+        #申请连接时，检测连接的有效性（性能损耗）
+        testOnBorrow: false
+        #归还连接时，检测连接的有效性（性能损耗）
+        testOnReturn: false 
+        #监控统计拦截的filters,去掉后监控界面sql无法统计，'wall用于防火墙','log4j'用于日志
+        druid:
+             sys:
+                filters: stat,wall,log4j
+        filters: stat # ,wall,log4j # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙  
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000 # 通过connectProperties属性来打开mergeSql功能；慢SQL记录  
+        useGlobalDataSourceStat: true # 合并多个DruidDataSource的监控数据  
+        druidLoginName: root # 登录druid的账号  
+        druidPassword: root # 登录druid的密码
+      
+
+
